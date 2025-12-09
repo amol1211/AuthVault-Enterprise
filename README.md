@@ -1,3 +1,5 @@
+# AuthVault Enterprise Edition
+
 # 🔐🌈🌟AuthVault - The authorization App 🌈🌟🔐
 
 ## Introduction
