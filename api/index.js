@@ -4,40 +4,20 @@ import dotenv from "dotenv";
 import userRoutes from "./routes/user.route.js";
 import authRoutes from "./routes/auth.route.js";
 import cookieParser from "cookie-parser";
-import path from "path";
 
-dotenv.config();
-
-mongoose
-  .connect(process.env.MONGO)
-  .then(() => {
-    console.log("Connected to MongoDB");
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-
-const __dirname = path.resolve();
+dotenv.config(); // loads api/.env
 
 const app = express();
 
-app.use(express.static(path.join(__dirname, "/client/dist")));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
-});
-
+/* ================= Middleware ================= */
 app.use(express.json());
-
 app.use(cookieParser());
 
-app.listen(3000, () => {
-  console.log("Server listening on port 3000");
-});
-
+/* ================= Routes ================= */
 app.use("/api/user", userRoutes);
 app.use("/api/auth", authRoutes);
 
+/* ================= Error Handler ================= */
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
   const message = err.message || "Internal Server Error";
@@ -47,3 +27,18 @@ app.use((err, req, res, next) => {
     statusCode,
   });
 });
+
+/* ================= DB + Server ================= */
+const PORT = process.env.PORT || 4000;
+
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => {
+    console.log("Connected to MongoDB");
+    app.listen(PORT, "0.0.0.0", () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error("MongoDB connection error:", err);
+  });
