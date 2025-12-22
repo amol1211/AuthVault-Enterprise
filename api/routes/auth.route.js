@@ -5,11 +5,12 @@ import {
   google,
   signout,
 } from "../controllers/auth.controller.js";
+import { authRateLimiter } from "../middleware/rateLimiter.js";
 
 const router = express.Router();
 
-router.post("/signup", signup);
-router.post("/signin", signin);
+router.post("/signup", authRateLimiter, signup);
+router.post("/signin", authRateLimiter, signin);
 router.post("/google", google);
 router.get("/signout", signout);
 
