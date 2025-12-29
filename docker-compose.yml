@@ -6,14 +6,10 @@ services:
       - ./api/.env
     depends_on:
       - redis
-    ports:
-      - "4000:4000"
 
   frontend:
     image: authvault-enterprise-client
     container_name: authvault_client
-    ports:
-      - "3000:80"
     depends_on:
       - backend
 
