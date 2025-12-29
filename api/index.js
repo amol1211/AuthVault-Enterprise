@@ -4,12 +4,24 @@ import dotenv from "dotenv";
 import userRoutes from "./routes/user.route.js";
 import authRoutes from "./routes/auth.route.js";
 import cookieParser from "cookie-parser";
+import cors from "cors";
+import helmet from "helmet";
 
 dotenv.config(); // loads api/.env
 
 const app = express();
+app.set("trust proxy", 1);
 
 /* ================= Middleware ================= */
+app.use(helmet());
+
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 app.use(cookieParser());
 
