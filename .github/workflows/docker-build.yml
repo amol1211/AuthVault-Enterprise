@@ -1,28 +1,29 @@
-name: Docker Build CI
+name: Build & Deploy AuthVault
 
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Build backend image
+      - name: Setup SSH
         run: |
-          docker build -t authvault-enterprise-api ./api
+          mkdir -p ~/.ssh
+          echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Build frontend image
+      - name: Deploy to EC2
         run: |
-          docker build -t authvault-enterprise-client ./client
+          ssh ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
+            cd ~/AuthVault-Enterprise
+            git pull origin main
+            docker-compose up -d --build
+          EOF
