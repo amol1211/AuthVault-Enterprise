@@ -1,12 +1,11 @@
-# AuthVault Enterprise Edition
-
-# 🔐🌈🌟AuthVault - The authorization App 🌈🌟🔐
+# 🔐🌈🌟 AuthVault Enterprise Edition - The authorization App 🌈🌟🔐
 
 ## Introduction
+Production-grade authentication system built with the **MERN stack**, enhanced with **DevOps infrastructure, containerization, and automated deployment**.
 
-Welcome to **AuthVault**! AuthVault is a robust web application crafted using the MERN stack — MongoDB, Express, React, and Node.js. This dynamic site offers seamless authentication capabilities, allowing users to sign up, sign in securely, and sign out. It includes Google's OAuth functionality and delete user functionality. Access to protected routes is exclusively granted to authenticated users so that users can update their credentials such as profile picture, username, email, and password.
+AuthVault Enterprise is an upgraded version of the original AuthVault project, demonstrating **secure authentication architecture and full production deployment** using modern cloud and DevOps tools. Crafted using the MERN stack — MongoDB, Express, React, and Node.js. This dynamic site offers seamless authentication capabilities, allowing users to sign up, sign in securely, and sign out. It includes Google's OAuth functionality and delete user functionality. Access to protected routes is exclusively granted to authenticated users so that users can update their credentials such as profile picture, username, email, and password.
 
-## [![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen?style=for-the-badge)](https://authvault.onrender.com)
+## [![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen?style=for-the-badge)](https://authvault.duckdns.org)
 
 ## 🏠Homepage
 
@@ -28,6 +27,17 @@ Welcome to **AuthVault**! AuthVault is a robust web application crafted using th
 
 ![Screenshot of AuthVault's UserProfilePage](/client/src/assets/authvaultPic5.png)
 
+## 🧠 Project Purpose
+
+This project demonstrates how a modern authentication system can be:
+
+- Secure
+- Scalable
+- Containerized
+- Cloud deployed
+- Automatically deployed via CI/CD
+
+It simulates how authentication services are deployed in **real production environments**.
 ## 🛠️ Tech Stack
 
 - **Frontend**: 🌐React.js, React Router, Tailwind CSS
@@ -37,16 +47,175 @@ Welcome to **AuthVault**! AuthVault is a robust web application crafted using th
 - **Authentication**: 🔐JSON Web Tokens (JWT), Google OAuth
 - **Storage**: 🏬Firebase Storage (for profile images)
 
-## Features
+## 🏗️ Architecture Overview
+User Browser
+    │
+    ▼
+DuckDNS Domain
+    │
+    ▼
+Nginx Reverse Proxy (HTTPS)
+    │
+    ├──────────────► React Frontend Container
+    │
+    ▼
+Node.js Backend API Container
+    │
+    ├──────────────► MongoDB Atlas
+    │
+    ▼
+Redis Container (Caching / Rate Limiting)
 
-- ➕ Sign up, sign in, and sign out securely
-- 🔒 Google OAuth integration for seamless sign-ins
-- ✏️ Update profile information (username, email, password, profile picture)
-- ❌ Delete user accounts safely
-- 🔒 Access to protected routes for authenticated users
-- 🔄 Efficient state management with Redux Toolkit
-- 🔄 Robust CRUD operations with MongoDB
-- 🎨 Mobile responsive
+## 🌐Infrastructure hosted on:
+
+- AWS EC2
+- Docker Compose
+- Nginx Reverse Proxy
+- GitHub Actions CI/CD
+- Let's Encrypt SSL
+- Elastic IP
+# ⚙️ Tech Stack
+
+## Frontend
+
+- React.js
+- React Router
+- Tailwind CSS
+- Redux Toolkit
+
+---
+
+## Backend
+
+- Node.js
+- Express.js
+- MongoDB Atlas
+- Redis
+- JWT Authentication
+- Google OAuth
+- bcrypt password hashing
+
+---
+
+## DevOps & Infrastructure
+
+- Docker
+- Docker Compose
+- Nginx Reverse Proxy
+- AWS EC2
+- Elastic IP
+- DuckDNS domain
+- Let's Encrypt SSL
+- GitHub Actions CI/CD
+
+---
+
+# 🔐 Security Features
+
+- JWT based authentication
+- Password hashing using bcrypt
+- Protected API routes
+- Secure cookie handling
+- Rate limiting to prevent abuse
+- HTTPS encryption via Let's Encrypt
+- Reverse proxy security with Nginx
+- Token based authentication validation
+
+---
+
+# 🚀 Core Features
+
+### Authentication
+
+- User registration
+- Secure login/logout
+- Google OAuth authentication
+- JWT token based authentication
+
+---
+
+### Profile Management
+
+Users can:
+
+- Update username
+- Update email
+- Change password
+- Upload profile picture
+- Delete account
+
+---
+
+### Security
+
+- Password hashing
+- Route protection
+- Rate limiting
+- Secure authentication tokens
+
+---
+
+### Deployment
+
+- Containerized using Docker
+- Nginx reverse proxy
+- HTTPS enabled
+- CI/CD auto deployment
+- Cloud hosted on AWS EC2
+
+---
+
+# 📦 Infrastructure Components
+
+### Docker Containers
+
+authvault_client → React frontend  
+authvault_api → Node.js backend  
+authvault_redis → Redis caching  
+authvault_nginx → Reverse proxy
+
+All services are managed using **Docker Compose**.
+
+---
+
+# 🔄 CI/CD Pipeline
+
+Automated deployment using **GitHub Actions**.
+
+Workflow:
+
+Push to main branch
+        │
+        ▼
+GitHub Actions triggered
+        │
+        ▼
+SSH into AWS EC2
+        │
+        ▼
+Pull latest code
+        │
+        ▼
+Rebuild Docker containers
+        │
+        ▼
+Restart services automatically
+
+
+This ensures **automatic deployment after every commit**.
+
+---
+
+# 🔒 HTTPS Setup
+
+Secure HTTPS using:
+
+- Let's Encrypt SSL certificates
+- Automatic certificate renewal
+- Nginx SSL termination
+- HTTP → HTTPS redirect
+
+---
 
 ## 🔍 How it Works
 
@@ -58,10 +227,23 @@ Welcome to **AuthVault**! AuthVault is a robust web application crafted using th
 6. **CRUD Operations**: Perform Create, Read, Update, and Delete operations using MongoDB.
 7. **Password Encryption**: Encrypted user's passwords in MongoDB Atlas using bcryptjs library.
 
+## 📈 Key Learning Outcomes
+
+This project demonstrates:
+
+- Full MERN stack development
+- Authentication system design
+- Secure backend API architecture
+- Containerized application deployment
+- Reverse proxy configuration
+- SSL certificate management
+- Cloud deployment on AWS
+- CI/CD automation using GitHub Actions
+  
 ## 📝 Contributing
 
 Contributions are welcome! If you would like to help improve AuthVault or add new features, please fork the repository and submit a pull request. .
 
 ## 👤 Author
 
-AuthVault is crafted with 💚 by **Amol**. Feel free to reach out for any questions or suggestions!
+AuthVault Enterprise is crafted with 💚 by **Amol**. Feel free to reach out for any questions or suggestions!
