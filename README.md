@@ -48,24 +48,69 @@ It simulates how authentication services are deployed in **real production envir
 - **Storage**: 🏬Firebase Storage (for profile images)
 
 ## 🏗️ Architecture Overview
-User Browser
-    │
-    ▼
-DuckDNS Domain
-    │
-    ▼
-Nginx Reverse Proxy (HTTPS)
-    │
-    ├──────────────► React Frontend Container
-    │
-    ▼
-Node.js Backend API Container
-    │
-    ├──────────────► MongoDB Atlas
-    │
-    ▼
-Redis Container (Caching / Rate Limiting)
+# 🏗️ Architecture Overview
 
+```text
+                         User Browser
+                              │
+                              ▼
+                     ┌─────────────────┐
+                     │   DuckDNS Domain │
+                     └────────┬────────┘
+                              │
+                              ▼
+                     ┌─────────────────┐
+                     │ Nginx Reverse   │
+                     │     Proxy       │
+                     │   HTTPS / SSL   │
+                     └────────┬────────┘
+                              │
+                 ┌────────────┴────────────┐
+                 │                         │
+                 ▼                         ▼
+        ┌─────────────────┐       ┌─────────────────┐
+        │ React Frontend  │       │ Node.js Backend │
+        │    Container    │──────►│      API        │
+        └─────────────────┘       └────────┬────────┘
+                                           │
+                              ┌────────────┴────────────┐
+                              │                         │
+                              ▼                         ▼
+                     ┌─────────────────┐      ┌─────────────────┐
+                     │  MongoDB Atlas  │      │ Redis Container │
+                     │    Database     │      │Caching / Rate   │
+                     └─────────────────┘      │    Limiting     │
+                                              └─────────────────┘
+```
+## ☁️ Deployment Architecture
+```
+ GitHub Repository
+                           │
+                           ▼
+                    GitHub Actions
+                           │
+                           ▼
+                    AWS EC2 Server
+                           │
+                           ▼
+                    Docker Compose
+                           │
+             ┌─────────────┼─────────────┐
+             │             │             │
+             ▼             ▼             ▼
+        React Client   Node.js API     Redis
+             │             │
+             └──────┬──────┘
+                    │
+                    ▼
+              Nginx Reverse Proxy
+                    │
+                    ▼
+              HTTPS / Let's Encrypt
+                    │
+                    ▼
+              DuckDNS Domain
+```
 ## 🌐Infrastructure hosted on:
 
 - AWS EC2
